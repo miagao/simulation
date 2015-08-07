@@ -130,7 +130,7 @@
     }
 
     var WorkerPool = function(options) {
-      var MAX_WORKERS = 20;
+      var MAX_WORKERS = 5;
       this.domElement = $('#workers');
 
       this.workers = [];
@@ -139,6 +139,16 @@
         this.workers.push(worker);
         this.domElement.append(worker.domElement);
       }
+
+	  var RandomWorkerStrategy= function(workers) {
+        this.getWorker = function() {
+          var j = Math.floor(Math.random() * workers.length);
+          var worker = workers[j];
+          return worker;
+        }
+        return this;
+	  };
+
 
 
       var RoundRobinStrategy = function(workers) {
@@ -156,7 +166,8 @@
         return this;
       };
 
-      this.strategy = new RoundRobinStrategy(this.workers);
+
+      this.strategy = new RandomWorkerStrategy(this.workers);
       this.addJob = function() {
         this.strategy.getWorker().addJob(new Job());
       };
@@ -176,7 +187,7 @@
     })
 
     $('#create-jobs').on('click', function() {
-      var CONCURRENT_JOBS = 400;
+      var CONCURRENT_JOBS = 5;
       for(var i = 0; i < CONCURRENT_JOBS; i++) {
         pool.addJob();
       }

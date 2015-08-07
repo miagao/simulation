@@ -313,7 +313,7 @@ class RandomWalkRobot(Robot):
 
 #print  runSimulation(1, 1.0, 10, 10, 1, 3, StandardRobot)
 print  runSimulation(1, 1.0, 5, 5, 1, 300, RandomWalkRobot)
-#testRobotMovement(RandomWalkRobot, RectangularRoom)
+testRobotMovement(RandomWalkRobot, RectangularRoom)
 
 def showPlot1(title, x_label, y_label):
     """
